@@ -152,13 +152,13 @@ def make_pod(
     notebook_container.resources.requests = {}
 
     if cpu_guarantee:
-        notebook_container.resources.requests['cpu'] = cpu_guarantee
+        notebook_container.resources.requests['cpu'] = float(cpu_guarantee)
     if mem_guarantee:
         notebook_container.resources.requests['memory'] = mem_guarantee
 
     notebook_container.resources.limits = {}
     if cpu_limit:
-        notebook_container.resources.limits['cpu'] = cpu_limit
+        notebook_container.resources.limits['cpu'] = float(cpu_limit)
     if mem_limit:
         notebook_container.resources.limits['memory'] = mem_limit
     if nvidia_gpu_limit:
