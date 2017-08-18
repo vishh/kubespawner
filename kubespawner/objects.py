@@ -36,6 +36,7 @@ def make_pod(
     cpu_guarantee,
     mem_limit,
     mem_guarantee,
+    nvidia_gpu_limit,
     lifecycle_hooks,
     init_containers,
 ):
@@ -98,6 +99,8 @@ def make_pod(
         String specifying the max amount of RAM the user's pod is guaranteed
         to have access to. String ins loat/int since common suffixes
         are allowed
+      - nvidia_gpu_limit:
+        Number of Nvidia GPUs to be allocated to user's pod.
       - lifecycle_hooks:
         Dictionary of lifecycle hooks
       - init_containers:
@@ -158,6 +161,8 @@ def make_pod(
         notebook_container.resources.limits['cpu'] = cpu_limit
     if mem_limit:
         notebook_container.resources.limits['memory'] = mem_limit
+    if nvidia_gpu_limit:
+        notebook_container.resources.limits['alpha.kubernetes.io/nvidia-gpu'] = nvidia_gpu_limit
     notebook_container.volume_mounts = volume_mounts
     pod.spec.containers.append(notebook_container)
 

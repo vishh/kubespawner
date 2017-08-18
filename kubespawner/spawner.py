@@ -658,6 +658,7 @@ class KubeSpawner(Spawner):
             cpu_guarantee=self.cpu_guarantee,
             mem_limit=self.mem_limit,
             mem_guarantee=self.mem_guarantee,
+            nvidia_gpu_limit=self.nvidia_gpu_limit,
             lifecycle_hooks=self.singleuser_lifecycle_hooks,
             init_containers=self.singleuser_init_containers,
         )
