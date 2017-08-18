@@ -88,6 +88,16 @@ class KubeSpawner(Spawner):
         """
     )
 
+    nvidia_gpu_limit = Integer(
+        0,
+        config=True,
+        help="""
+        Number of Nvidia GPUs to allocate to user pods.
+        
+        Defaults to 0.
+        """
+    )
+
     namespace = Unicode(
         config=True,
         help="""
