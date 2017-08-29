@@ -629,14 +629,14 @@ class KubeSpawner(Spawner):
         # This makes sure that we don"t accidentally give access to the whole
         # kubernetes API to the users in the spawned pods.
         # See https://github.com/kubernetes/kubernetes/issues/16779#issuecomment-157460294
-        hack_volume = V1Volume()
-        hack_volume.name =  "no-api-access-please"
-        hack_volume.empty_dir = {}
+        # hack_volume = V1Volume()
+        # hack_volume.name =  "no-api-access-please"
+        # hack_volume.empty_dir = {}
 
-        hack_volume_mount = V1VolumeMount()
-        hack_volume_mount.name = "no-api-access-please"
-        hack_volume_mount.mount_path = "/var/run/secrets/kubernetes.io/serviceaccount"
-        hack_volume_mount.read_only = True
+        # hack_volume_mount = V1VolumeMount()
+        # hack_volume_mount.name = "no-api-access-please"
+        # hack_volume_mount.mount_path = "/var/run/secrets/kubernetes.io/serviceaccount"
+        # hack_volume_mount.read_only = True
 
         # Default set of labels, picked up from
         # https://github.com/kubernetes/helm/blob/master/docs/chart_best_practices/labels.md
@@ -660,8 +660,8 @@ class KubeSpawner(Spawner):
             run_as_uid=singleuser_uid,
             fs_gid=singleuser_fs_gid,
             env=self.get_env(),
-            volumes=self._expand_all(self.volumes) + [hack_volume],
-            volume_mounts=self._expand_all(self.volume_mounts) + [hack_volume_mount],
+            volumes=self._expand_all(self.volumes), # + [hack_volume],
+            volume_mounts=self._expand_all(self.volume_mounts), # + [hack_volume_mount],
             working_dir=self.singleuser_working_dir,
             labels=labels,
             cpu_limit=self.cpu_limit,
